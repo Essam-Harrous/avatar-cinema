@@ -2,6 +2,7 @@ const userModel = require('../db/models/userModel.js')
 const reservationModel = require('../db/models/reservationModel.js')
 exports.deleteUser = (req, res) => {
     userModel.findUser({ _id: req.params.id }, (err, data) => {
+        console.log(data)
         if (err) {
             return res.status(404).json({
                 status: false,
@@ -9,7 +10,7 @@ exports.deleteUser = (req, res) => {
                 error: err
             })
         }
-        userModel.deleteUser(data._id, (err, result) => {
+        userModel.deleteUser(data[0]._id, (err, result) => {
             if (err) {
                 return res.status(400).json({
                     status: false,
